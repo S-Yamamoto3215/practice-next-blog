@@ -8,6 +8,7 @@ import { TwoColumn, TwoColumnMain, TwoColumnSidebar } from "components/two-colum
 import ConvertBody from "components/convert-body";
 import PostCategories from "components/post-categories";
 import Image from "next/image";
+import { eyecatchLocal } from "lib/constants";
 
 export default function Schedule({
   title,
@@ -60,7 +61,7 @@ export default function Schedule({
 }
 
 export async function getStaticProps() {
-  const slug = 'schedule';
+  const slug = 'micro';
 
   const post = await getPostBySlug(slug);
   const description = extractText(post.content);
@@ -70,7 +71,7 @@ export async function getStaticProps() {
       title: post.title,
       publish: post.publishDate,
       content: post.content,
-      eyecatch: post.eyecatch,
+      eyecatch: post.eyecatch ?? eyecatchLocal,
       categories: post.categories,
       description: description,
     },
